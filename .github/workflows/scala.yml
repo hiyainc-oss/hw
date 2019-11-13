@@ -43,16 +43,27 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-${{ matrix.scala }}-coursier-
 
+    - name: Publish
+      run: |
+        echo "ThisBuild / version := \"$VERSION\"" > version.sbt
+        sbt ++$SCALA_VERSION publish
+      env:
+        SCALA_VERSION: ${{ matrix.scala }}
+        BINTRAY_USER: agobi
+        BINTRAY_PASS: ${{ secrets.BINTRAY_PASS }}
+        VERSION: 0.0.2
+
     - name: Run tests
       run: sbt ++$SCALA_VERSION test
       env:
         SCALA_VERSION: ${{ matrix.scala }}
 
-    - name: Publish
-      run: sbt ++$SCALA_VERSION publish
+    - name: Release
+      run: sbt ++$SCALA_VERSION bintrayRelease
       env:
         SCALA_VERSION: ${{ matrix.scala }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BINTRAY_USER: agobi
+        BINTRAY_PASS: ${{ secrets.BINTRAY_PASS }}
 
     - name: Clean up before caching
       run: |

@@ -45,4 +45,3 @@ jobs:
       env:
         SCALA_VERSION: ${{ matrix.scala }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VERSION: ${{ GITHUB_REF }}

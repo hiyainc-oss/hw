@@ -13,7 +13,7 @@ credentials ++= envVars.value.get("GITHUB_TOKEN").map(token =>
   List(Credentials(
     realm = "GitHub Package Registry",
     host = "maven.pkg.github.com",
-    userName = "",
+    userName = "github",
     passwd = token
   ))
 ).getOrElse(Nil)

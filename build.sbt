@@ -9,11 +9,12 @@ lazy val hiyaIncOSS = "Hiya Inc. OSS" at "https://maven.pkg.github.com/hiyainc-o
 resolvers += hiyaIncOSS
 publishTo := Some(hiyaIncOSS)
 
-credentials ++= envVars.value.get("GITHUB_TOKEN").map(token =>
+val token = scala.sys.env.get("GITHUB_TOKEN")
+credentials ++= token.map(t =>
   List(Credentials(
     realm = "GitHub Package Registry",
     host = "maven.pkg.github.com",
-    userName = "github",
-    passwd = token
+    userName = "agobi",
+    passwd = t
   ))
 ).getOrElse(Nil)

@@ -11,7 +11,7 @@ publishTo := Some(hiyaIncOSS)
 
 credentials ++= envVars.value.get("GITHUB_TOKEN").map(token =>
   List(Credentials(
-    realm = "GitHub Package Registry @ maven.pkg.github.com",
+    realm = "GitHub Package Registry",
     host = "maven.pkg.github.com",
     userName = "",
     passwd = token

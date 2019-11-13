@@ -32,6 +32,8 @@ jobs:
       with:
         path: ~/.cache/coursier
         key: ${{ runner.os }}-coursier
-
+    - name: Scala version
+      env:
+        SCALA_VERSION: ${{ matrix.scala }}
     - name: Run tests
-      run: sbt test
+      run: sbt ++$SCALA_VERSION test

@@ -14,7 +14,7 @@ credentials ++= token.map(t =>
   List(Credentials(
     realm = "GitHub Package Registry",
     host = "maven.pkg.github.com",
-    userName = "agobi",
+    userName = "hiyainc-oss",
     passwd = t
   ))
 ).getOrElse(Nil)

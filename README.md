@@ -1,5 +1,5 @@
 # HW
-
-[![Build Status](https://travis-ci.org/hiyainc-oss/hw.svg?branch=master)](https://travis-ci.org/hiyainc-oss/hw)
+![Build Status](https://github.com/hiyainc-oss/hw/workflows/Scala%20CI/badge.svg)
+[ ![Download](https://api.bintray.com/packages/hiyainc-oss/maven/hw/images/download.svg) ](https://bintray.com/hiyainc-oss/maven/hw/_latestVersion)
 
 Hello world.

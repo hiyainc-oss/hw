@@ -34,4 +34,4 @@ jobs:
         key: ${{ runner.os }}-coursier
 
     - name: Run tests
-      run: sbt ++${{ matrix.scala}} test
+      run: sbt test

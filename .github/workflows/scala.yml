@@ -58,7 +58,7 @@ jobs:
         echo "ThisBuild / version := \"$VERSION\"" > version.sbt
 
     - name: Run tests with coverage
-      if: ! startsWith(matrix.scala, '2.13')
+      if: "! startsWith(matrix.scala, '2.13')"
       run: sbt ++$SCALA_VERSION ';package;coverage;test'
       env:
         SCALA_VERSION: ${{ matrix.scala }}

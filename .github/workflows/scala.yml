@@ -65,7 +65,7 @@ jobs:
     - name: Run tests
       run: |
         pip install --user codecov
-        sbt ++$SCALA_VERSION ';package;coverage && codecov'
+        sbt ++$SCALA_VERSION ';package;coverage' && codecov
       env:
         SCALA_VERSION: ${{ matrix.scala }}
 

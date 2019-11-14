@@ -58,7 +58,7 @@ jobs:
         echo "ThisBuild / version := \"$VERSION\"" > version.sbt
 
     - name: Run tests
-      run: sbt ++$SCALA_VERSION ';package;coverage'
+      run: sbt ++$SCALA_VERSION ';package;coverage;test;coverageReport'
       env:
         SCALA_VERSION: ${{ matrix.scala }}
 

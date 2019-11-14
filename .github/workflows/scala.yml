@@ -71,7 +71,7 @@ jobs:
         SCALA_VERSION: ${{ matrix.scala }}
 
     - name: Publish coverage report
-      if: ! startsWith(matrix.scala, '2.13')
+      if: "! startsWith(matrix.scala, '2.13')"
       uses: codecov/codecov-action@v1.0.3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}

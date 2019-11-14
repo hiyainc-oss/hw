@@ -57,12 +57,21 @@ jobs:
         VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
         echo "ThisBuild / version := \"$VERSION\"" > version.sbt
 
-    - name: Run tests
-      run: sbt ++$SCALA_VERSION ';package;coverage;test;coverageReport'
+    - name: Run tests (with coverage)
+      if: !startsWith(matrix.scala, '2.13')
+      run: sbt ++$SCALA_VERSION ';package;coverage;test'
+      env:
+        SCALA_VERSION: ${{ matrix.scala }}
+
+    # https://github.com/scoverage/sbt-scoverage/issues/295
+    - name: Run tests (without coverage)
+      if: startsWith(matrix.scala, '2.13')
+      run: sbt ++$SCALA_VERSION ';package;test'
       env:
         SCALA_VERSION: ${{ matrix.scala }}
 
     - name: Publish coverage report
+      if: !startsWith(matrix.scala, '2.13')
       uses: codecov/codecov-action@v1.0.3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}

@@ -97,12 +97,15 @@ jobs:
         uses: actions/cache@v1.0.0
         with:
           path: ~/.sbt
-          key: ${{ runner.os }}-${{ matrix.scala }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/project/**/*.scala') }}
+          key: ${{ runner.os }}-2.13-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/project/**/*.scala') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.scala }}-sbt-
 
       - name: Release
-        run: sbt bintrayRelease
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
+          echo "ThisBuild / version := \"$VERSION\"" > version.sbt
+          sbt bintrayRelease
         env:
           BINTRAY_USER: agobi
           BINTRAY_PASS: ${{ secrets.BINTRAY_PASS }}

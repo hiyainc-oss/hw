@@ -59,7 +59,7 @@ jobs:
 
     - name: Run tests with coverage
       if: "! startsWith(matrix.scala, '2.13')"
-      run: sbt ++$SCALA_VERSION ';package;coverage;test'
+      run: sbt ++$SCALA_VERSION ';package;coverage;test;coverageReport'
       env:
         SCALA_VERSION: ${{ matrix.scala }}
 

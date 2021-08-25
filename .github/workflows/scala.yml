@@ -62,7 +62,6 @@ jobs:
       run: sbt ++$SCALA_VERSION ';package;coverage;test;coverageReport'
       env:
         SCALA_VERSION: ${{ matrix.scala }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # https://github.com/scoverage/sbt-scoverage/issues/295
     - name: Run tests (without coverage)
@@ -70,7 +69,6 @@ jobs:
       run: sbt ++$SCALA_VERSION ';package;test'
       env:
         SCALA_VERSION: ${{ matrix.scala }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish coverage report
       if: "! startsWith(matrix.scala, '2.13')"

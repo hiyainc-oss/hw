@@ -79,7 +79,7 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Publish
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+      # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
       run: |
         VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
         echo "ThisBuild / version := \"$VERSION\"" > version.sbt
@@ -116,13 +116,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-2.13.1-sbt-
 
-      - name: Release
-        run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
-          echo "ThisBuild / version := \"$VERSION\"" > version.sbt
-          sbt release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Release
+      #   run: |
+      #     VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
+      #     echo "ThisBuild / version := \"$VERSION\"" > version.sbt
+      #     sbt publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: actions/create-release@v1

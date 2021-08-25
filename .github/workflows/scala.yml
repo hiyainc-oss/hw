@@ -3,7 +3,7 @@ name: Scala CI
 on:
   push:
     branches:
-      - github-packages
+      - master
     tags:
       - 'v*'
 

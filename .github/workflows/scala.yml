@@ -85,7 +85,7 @@ jobs:
         echo "ThisBuild / version := \"$VERSION\"" > version.sbt
         sbt ++$SCALA_VERSION publish
       env:
-        SCALA_VERSION: ${{ matrix.scala }}}
+        SCALA_VERSION: ${{ matrix.scala }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Clean up before caching

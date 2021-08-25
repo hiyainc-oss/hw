@@ -3,7 +3,7 @@ name: Scala CI
 on:
   push:
     branches:
-      - master
+      - github-packages
     tags:
       - 'v*'
 
@@ -95,7 +95,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     needs: test
 
     steps:
@@ -119,10 +119,9 @@ jobs:
         run: |
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/v\(.*\),\1,')
           echo "ThisBuild / version := \"$VERSION\"" > version.sbt
-          sbt bintrayRelease
+          sbt release
         env:
-          BINTRAY_USER: agobi
-          BINTRAY_PASS: ${{ secrets.BINTRAY_PASS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: actions/create-release@v1
